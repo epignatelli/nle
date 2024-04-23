@@ -69,10 +69,10 @@ class CMakeBuild(build_ext.build_ext):
         install_cmd = ["cmake", "--install", "."]
 
         try:
-            subprocess.check_call(cmake_cmd, cwd=self.build_temp)
-            subprocess.check_call(build_cmd, cwd=self.build_temp)
+            subprocess.check_call(cmake_cmd, cwd=self.build_temp, shell=True)
+            subprocess.check_call(build_cmd, cwd=self.build_temp, shell=True)
             # Installs nethackdir. TODO: Can't we do this with setuptools?
-            subprocess.check_call(install_cmd, cwd=self.build_temp)
+            subprocess.check_call(install_cmd, cwd=self.build_temp, shell=True)
         except subprocess.CalledProcessError:
             # Don't obscure the error with a setuptools backtrace.
             sys.exit(1)
